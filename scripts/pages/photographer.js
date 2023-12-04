@@ -1,16 +1,32 @@
 //Mettre le code JavaScript lié à la page photographer.html
 
 
+const urlSearchParams = new URLSearchParams(window.location.search)
+const photographerId = urlSearchParams.get('id')
+
+const createPage = async () => {
+    if (photographerId) {
+
+        const photographersProfil = await getPhotographers(photographerId)
+        const selectedPhotographers = await selectPhotographerById(photographersProfil)
+        const displayedPhotographer = await displayPhotographer(selectedPhotographers);
+     } else {
+        throw new Error('l\'url n\'a pas permis d\'identifier un photpographe');
+     }
+}
+
+createPage();
+
+
 const selectPhotographerById = async (data)  => {
 
     let photographerToDisplay = []
     const photographerSelected = window.location.href.split('=').reverse()[0]
-    for (let i = 0; i< data.photographers.length; i++) {
-        if (data.photographers[i].id == photographerSelected) {
-            console.log(data.photographers[i])
 
-            photographerToDisplay.push(data.photographers[i])
-            console.log(photographerToDisplay)
+    for (let i = 0; i< data.length; i++) {
+        if (data[i].id == photographerSelected) {
+            photographerToDisplay.push(data[i])
+
         } 
     }
 
@@ -25,28 +41,40 @@ const selectPhotographerById = async (data)  => {
 }
 
 const displayPhotographer = async (photographers) => {
-    const photographerProfil = document.querySelector('header');
-    console.log(photographers)
+    const photographerProfil = document.querySelector('.photograph-header');
     const photographerModel = photographerTemplate(photographers[0]);
     const photographerCardDOM = photographerModel.getUserCardDOM();
     photographerProfil.appendChild(photographerCardDOM);
+
+    
+    const image = document.querySelector('.wrapperpicture');
+    const h2 = document.querySelector('.h2');
+
+    photographerProfil.appendChild(image);
+    photographerProfil.appendChild(h2);
+
+    const linkToRemove = document.querySelector('.link');
+    const cityandcountry = document.querySelector('.cityandcountry');
+    const tag = document.querySelector('.tag');
+    const price = document.querySelector('.pricephotographer');
+    const article = document.querySelector('.article');
+    article.remove();
+    price.classList.add('price');
+    linkToRemove.remove();
+
+
+
+    /* Création d'une div pour mettre en colonne les éléments générés sur le DOM */
+
+    const myDiv = document.createElement('div');
+    myDiv.classList.add("mydiv");
+    photographerProfil.appendChild(myDiv);
+    myDiv.appendChild(h2);
+    myDiv.appendChild(cityandcountry);
+    myDiv.appendChild(tag);
+
+
+    photographerProfil.classList.add('flexbox_profil');
 }
 
-async function getPhotographer() {
 
-    const response = await fetch('../../data/photographers.json')
-    if (!response.ok) {
-        throw new Error("Les informations n'ont pas pu être trouvées");
-    } else {
-        const data = await response.json();
-
-        const photographerToDisplay = await selectPhotographerById(data);
-        console.log(photographerToDisplay)
-        /*displayPhotographer(photographerToDisplay);*/
-        
-    }
-}
-
-
-
-getPhotographer();

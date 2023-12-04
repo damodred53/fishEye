@@ -1,5 +1,5 @@
 function photographerTemplate(photographers) {
-
+    console.log(photographers)
     const portrait = photographers.portrait
     const city = photographers.city;
     const country = photographers.country;
@@ -12,38 +12,48 @@ function photographerTemplate(photographers) {
 
     function getUserCardDOM() {
 
-        let currentUrl = new URL('http://photographer.html')
+        let currentUrl = new URL('http://127.0.0.1:5500/photographer.html')
         currentUrl.searchParams.set('id', idPhotographer);
-
 
         const article = document.createElement( 'article' );
         article.setAttribute("aria-label", `description de ${name}` )
         const wrapperPicture = document.createElement('div');
-        wrapperPicture.classList.add('wrapperPicture');
         const img = document.createElement( 'img' );
+        const h2 = document.createElement( 'h2' );
+        const cityAndCountry = document.createElement('h3');
+        const tag = document.createElement('p');
+        const pricePhotographer = document.createElement('p');
+        const link = document.createElement('a');
+
+        article.classList.add('article');
+        img.classList.add('img');
         img.setAttribute("src", picture)
         img.setAttribute("alt", `photo de ${name}`);
-        const h2 = document.createElement( 'h2' );
+        wrapperPicture.classList.add('wrapperpicture');
+        h2.classList.add("h2");
+        cityAndCountry.classList.add('cityandcountry');
+        tag.classList.add('tag');
+        pricePhotographer.classList.add('pricephotographer');
+        link.classList.add('link')
+        
         h2.textContent = name;
-        const cityAndCountry = document.createElement('h3')
-        cityAndCountry.classList.add('cityAndCountry')
-        cityAndCountry.innerHTML = `${city}, ${country}`;
-        const tag = document.createElement('p');
+        cityAndCountry.innerHTML = `${city}, ${country}`; 
         tag.innerHTML = tagline;
-        const pricePhotographer = document.createElement('p')
+
         pricePhotographer.id = 'photographer_section_price';
         pricePhotographer.innerHTML = `${price}€/jour`
-        const link = document.createElement('a');
+
         link.setAttribute('href', currentUrl.href );
 
+
+        wrapperPicture.appendChild(img)
         article.appendChild(link);
         link.appendChild(wrapperPicture)
-        wrapperPicture.appendChild(img);
         link.appendChild(h2);
+        
         article.appendChild(cityAndCountry);
         article.appendChild(tag);
         article.appendChild(pricePhotographer);
-        
         
 
         return (article);

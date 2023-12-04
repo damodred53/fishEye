@@ -46,7 +46,7 @@ h1 {
     margin-bottom: 0%;
 }
 
-.wrapperPicture {
+.wrapperpicture {
     height: 200px;
     width: 200px;
     overflow: hidden;
@@ -54,9 +54,9 @@ h1 {
     position: relative;
 }
 
-.photographer_section  img {
-    width: 280px;
-    height: 280px;
+.wrapperpicture  img {
+    width: 130%;
+    height: 130%;
     border-radius: 50%;
     object-fit: cover;  
     position: absolute;
@@ -93,3 +93,7 @@ h1 {
     margin: 2%;
     
 }
+
+
+
+
