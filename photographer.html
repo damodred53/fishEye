@@ -16,10 +16,55 @@
     </a>
   </header>
   <main id="main">
+
     <div class="photograph-header">
       <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
     </div>
+
+    <div class="sort_picture">
+      <p class="sort_paragraph">Trier par</p>
+
+      <div class="sort_button" ">
+        <!--<ol id=" options" class="dropdown_menu" role="listbox" aria-label="Options">
+        <li class="dropdown_option" role="option" id="filterbypopularity" data-order="1">Popularité
+          <button type="checkbox" onclick="displayListBox()" /><img class=" sort_button_img"
+            src=" ./assets/icons/arrow_2.svg">
+        </li>
+        <hr>
+        <li class="dropdown_option" role="option" id="filterbydate" data-order="2">Date</li>
+        <hr>
+        <li class="dropdown_option" role="option" id="filterbytitle" data-order="3">Titre</li>
+        </ol>-->
+        <select class="selection" id="options" role="listbox" aria-label="Options">
+          <option class="dropdown_option" role="option" id="filterbypopularity" data-order="1" value="rigatoni">
+            <p>Popularité</p>
+          </option>
+
+          <option class="dropdown_option second_choice" role="option" id="filterbydate" data-order="2" value="dave">Date
+          </option>
+          <option class="dropdown_option" role="option" id="filterbytitle" data-order="3" value="pumpernickel">Titre
+          </option>
+
+        </select>
+      </div>
+
+
+
+    </div>
+
+
+
+
+
+    <section class="photographies"></section>
+
+
+
   </main>
+
+
+
+
   <div id="contact_modal">
     <div class="modal">
       <header>
@@ -35,11 +80,15 @@
       </form>
     </div>
   </div>
+  <script src="scripts/model/photo.js"></script>
+  <script src="scripts/model/video.js"></script>
   <script src="scripts/pages/fetchdata.js"></script>
-
+  <script src="scripts/pages/listBox.js"></script>
   <script src="scripts/templates/photographer.js"></script>
-  <script src="/scripts/utils/contactForm.js"></script>
-  <script src="/scripts/pages/photographer.js"></script>
+  <script src="scripts/templates/photoAndVideo.js"></script>
+  <script src="scripts/utils/contactForm.js"></script>
+  <script src="scripts/pages/photographer.js"></script>
+
 </body>
 
 </html>

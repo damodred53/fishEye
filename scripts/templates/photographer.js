@@ -27,7 +27,7 @@ function photographerTemplate(photographers) {
 
         article.classList.add('article');
         img.classList.add('img');
-        img.setAttribute("src", picture)
+        img.setAttribute("src", picture);
         img.setAttribute("alt", `photo de ${name}`);
         wrapperPicture.classList.add('wrapperpicture');
         h2.classList.add("h2");
@@ -59,4 +59,9 @@ function photographerTemplate(photographers) {
         return (article);
     }
     return { name, picture, getUserCardDOM }
+
+
+
+
+   
 }

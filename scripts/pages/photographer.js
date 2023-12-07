@@ -4,11 +4,12 @@
 const urlSearchParams = new URLSearchParams(window.location.search)
 const photographerId = urlSearchParams.get('id')
 
+
 const createPage = async () => {
     if (photographerId) {
 
         const photographersProfil = await getPhotographers(photographerId)
-        const selectedPhotographers = await selectPhotographerById(photographersProfil)
+        const selectedPhotographers = await selectPhotographerById(photographersProfil.photographers)
         const displayedPhotographer = await displayPhotographer(selectedPhotographers);
      } else {
         throw new Error('l\'url n\'a pas permis d\'identifier un photpographe');
@@ -77,4 +78,79 @@ const displayPhotographer = async (photographers) => {
     photographerProfil.classList.add('flexbox_profil');
 }
 
+/* intégration de la partie photographie-gallery pour chaque photographe */
 
+const fetchPhotographies = async () => {
+
+    const fetch = await getPhotographers()
+    console.log(await fetch);
+
+    
+}
+
+fetchPhotographies();
+
+/* Intégration des photographies et des vidéos du photographe dont on est sur la page */
+
+const MediaPattern = (data) => {
+
+    let Instance = {};
+
+            if (data.image) {
+
+                const Instance =  new Photo(data)
+
+                /*console.log(photoInstance)*/
+
+            } else if (data.video) {
+
+
+                const Instance =  new Video(data)
+                /*console.log(videoInstance)*/
+
+            } else {
+                throw 'Unknown type format'
+            }
+        return Instance;
+      
+    }
+ 
+
+const MapData = (data) => {
+    console.log(data)
+    return data.map((elem) => photoAndVideo(elem))
+}
+
+const displayPhotosAndVideo = (data) => {
+
+    const arrayElement = [];
+    const MappedData = data.map((element) => {
+        const MediaInstance = MediaPattern(element);
+        arrayElement.push(element)
+    });
+    
+    console.log(arrayElement)
+
+    /*const concatenedcreateFactoryPattern = createFactoryPattern.photo.concat(createFactoryPattern.video);*/
+
+    const filteredMedia = arrayElement.filter((elem) => elem.photographerId == photographerId);
+
+    const mappedData = MapData(filteredMedia);
+    
+
+}
+
+const getPhotoAndVideos = async () => {
+
+    const fetchPhotosAndVideo = await getPhotographers();
+    if (!fetchPhotosAndVideo) {
+        throw new Error('Impossible de se connecter aux photos et aux vidéos');
+    } else {
+
+        const sortedMedia = displayPhotosAndVideo(fetchPhotosAndVideo.media);
+    }
+
+    
+}
+
+getPhotoAndVideos();
