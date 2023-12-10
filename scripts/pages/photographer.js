@@ -36,6 +36,7 @@ const selectPhotographerById = async (data)  => {
         throw new Error('Aucun photographe ne correspond à votre recherche');
         
     } else {
+
         return photographerToDisplay
     }
 
@@ -76,6 +77,37 @@ const displayPhotographer = async (photographers) => {
 
 
     photographerProfil.classList.add('flexbox_profil');
+
+    /* Création de la barre aside */
+    const searchlikePhotographers = await getPhotographers();
+
+    const arrayNumberOfLikesByArtist = [];
+    const pricePhotographer = [];
+    console.log(photographerId);
+
+    for (let i = 0; i<searchlikePhotographers.media.length ; i++) {
+        if (searchlikePhotographers.media[i].photographerId == photographerId) {
+            arrayNumberOfLikesByArtist.push(searchlikePhotographers.media[i].likes)
+        } ;
+    }
+
+    for (let i = 0; i<searchlikePhotographers.photographers.length ; i++) {
+        if (searchlikePhotographers.photographers[i].id == photographerId) {
+            pricePhotographer.push(searchlikePhotographers.photographers[i].price)
+        } ;
+    }
+
+
+    console.log(arrayNumberOfLikesByArtist);
+    const sumOfLikes = arrayNumberOfLikesByArtist.reduce((acc, likes) => acc + likes, 0)
+    console.log(sumOfLikes);
+    console.log(pricePhotographer);
+
+    /*const searchlikePhotographers = await getPhotographers();*/
+    console.log(searchlikePhotographers);
+    /* à faire : boucle for pour itérer dans search... pour récupérer les prix en lien avec id du photographe */
+    createAsideBar(pricePhotographer, sumOfLikes);
+
 }
 
 /* intégration de la partie photographie-gallery pour chaque photographe */
@@ -119,6 +151,14 @@ const MediaPattern = (data) => {
 const MapData = (data) => {
     console.log(data)
     return data.map((elem) => photoAndVideo(elem))
+
+}
+
+const createAsideBar = async (data, likes) => {
+
+    console.log(data);
+    console.log(likes)
+    asideBarTemplate(data, likes);
 }
 
 const displayPhotosAndVideo = (data) => {
@@ -131,13 +171,12 @@ const displayPhotosAndVideo = (data) => {
     
     console.log(arrayElement)
 
-    /*const concatenedcreateFactoryPattern = createFactoryPattern.photo.concat(createFactoryPattern.video);*/
 
     const filteredMedia = arrayElement.filter((elem) => elem.photographerId == photographerId);
-
+    /*const asideBar = createAsideBar(photographerId)*/
     const mappedData = MapData(filteredMedia);
     
-
+    return filteredMedia
 }
 
 const getPhotoAndVideos = async () => {
@@ -148,9 +187,10 @@ const getPhotoAndVideos = async () => {
     } else {
 
         const sortedMedia = displayPhotosAndVideo(fetchPhotosAndVideo.media);
+
     }
 
-    
+  
 }
 
 getPhotoAndVideos();

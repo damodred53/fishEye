@@ -46,10 +46,10 @@ function photographerTemplate(photographers) {
         link.setAttribute('href', currentUrl.href );
 
 
-        wrapperPicture.appendChild(img)
         article.appendChild(link);
         link.appendChild(wrapperPicture)
         link.appendChild(h2);
+        wrapperPicture.appendChild(img)
         
         article.appendChild(cityAndCountry);
         article.appendChild(tag);

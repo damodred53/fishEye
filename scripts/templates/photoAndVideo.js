@@ -1,26 +1,44 @@
-
 const photoAndVideo = (data) => {
 
+    let picture = "";
+    let video = null; 
 
-    const nameArtistBlock = document.querySelector('.h2')
+    const nameArtistBlock = document.querySelector('.h2');
     const nameArtist = nameArtistBlock.textContent;
 
+    if (data.image) {
+        picture = `../../Sample Photos/${nameArtist}/${data.image}`;
+    } else if (data.video) {
+        picture = `../../Sample Photos/${nameArtist}/${data.video}`;
+        video = document.createElement('video');
+        video.src = picture;
+        video.setAttribute('alt', `Vidéo intitulée : ${data.title}`);
+        video.classList.add('video');
+        
+    }
 
-    const picture = `../../Sample Photos/${nameArtist}/${data.image}`
+    /* évènement pour la lecture des vidéos */
+    if (data.video) {
+        video.addEventListener("click", () => {
+            if(video.paused) {
+                video.load();
+                video.play()
+            } else {
+                video.pause();
+            }
+        })
+    }
+    
 
-    const divPhotoAndVideo = document.querySelector('.photographies')
-
+    const divPhotoAndVideo = document.querySelector('.photographies');
     const myCard = document.createElement('div');
-    const image = document.createElement('img');
-    
+    const mediaElement = data.video ? video : document.createElement('img'); 
     myCard.classList.add('cardphotographer');
-    image.src = picture;
-    image.classList.add('imagephotographer');
-    
-    
+    mediaElement.src = picture;
+    mediaElement.classList.add(data.video ? 'video' : 'imagephotographer'); 
 
-    /* création de la partie like et titre */
-    const underPart = document.createElement('div')
+    /* Création de la partie like et titre */
+    const underPart = document.createElement('div');
     const paragraph_title = document.createElement('p');
     const heart = document.createElement('img');
     const divOfLikes = document.createElement('div');
@@ -32,20 +50,15 @@ const photoAndVideo = (data) => {
     paragraph_title.classList.add('paragraphphotografer');
     paragraph_title.textContent = data.title;
     underPart.classList.add('underpart');
-    heart.setAttribute('alt', 'likes' );
-     /*création du template */
-     divPhotoAndVideo.appendChild(myCard)
-     myCard.appendChild(image);
-     
-     myCard.appendChild(underPart);
-     underPart.appendChild(paragraph_title);
+    heart.setAttribute('alt', 'likes');
+
+    /* Création du template */
+    divPhotoAndVideo.appendChild(myCard);
+    myCard.appendChild(mediaElement);
+    myCard.appendChild(underPart);
+    underPart.appendChild(paragraph_title);
     underPart.appendChild(divOfLikes);
-     divOfLikes.appendChild(numberOfLikes);
-     divOfLikes.appendChild(heart);
-     
+    divOfLikes.appendChild(numberOfLikes);
+    divOfLikes.appendChild(heart);
 
-
-
-
-
-}
+};

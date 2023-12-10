@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <link href="css/photographer.css" rel="stylesheet" type="text/css" />
   <meta charset="utf-8">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
@@ -17,6 +17,7 @@
   </header>
   <main id="main">
 
+
     <div class="photograph-header">
       <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
     </div>
@@ -24,7 +25,7 @@
     <div class="sort_picture">
       <p class="sort_paragraph">Trier par</p>
 
-      <div class="sort_button" ">
+      <div class="sort_button">
         <!--<ol id=" options" class="dropdown_menu" role="listbox" aria-label="Options">
         <li class="dropdown_option" role="option" id="filterbypopularity" data-order="1">Popularité
           <button type="checkbox" onclick="displayListBox()" /><img class=" sort_button_img"
@@ -36,13 +37,19 @@
         <li class="dropdown_option" role="option" id="filterbytitle" data-order="3">Titre</li>
         </ol>-->
         <select class="selection" id="options" role="listbox" aria-label="Options">
-          <option class="dropdown_option" role="option" id="filterbypopularity" data-order="1" value="rigatoni">
-            <p>Popularité</p>
-          </option>
+          <div>
+            <option class="dropdown_option" role="option" id="filterbypopularity" data-order="1" value="rigatoni">
 
-          <option class="dropdown_option second_choice" role="option" id="filterbydate" data-order="2" value="dave">Date
+              <p>Popularité</p>
+
+            </option>
+          </div>
+
+          <option class="dropdown_option second_choice" role="option" id="filterbydate" data-order="2" value="dave">
+            <div class="border">Date</div>
           </option>
-          <option class="dropdown_option" role="option" id="filterbytitle" data-order="3" value="pumpernickel">Titre
+          <option class="dropdown_option" role="option" id="filterbytitle" data-order="3" value="pumpernickel">
+            <div>Titre</div>
           </option>
 
         </select>
@@ -56,7 +63,10 @@
 
 
 
-    <section class="photographies"></section>
+    <section class="photographies">
+
+    </section>
+
 
 
 
@@ -80,12 +90,15 @@
       </form>
     </div>
   </div>
+
+  <script src="scripts/templates/asideBarTemplate.js"></script>
   <script src="scripts/model/photo.js"></script>
   <script src="scripts/model/video.js"></script>
   <script src="scripts/pages/fetchdata.js"></script>
   <script src="scripts/pages/listBox.js"></script>
   <script src="scripts/templates/photographer.js"></script>
   <script src="scripts/templates/photoAndVideo.js"></script>
+
   <script src="scripts/utils/contactForm.js"></script>
   <script src="scripts/pages/photographer.js"></script>
 
