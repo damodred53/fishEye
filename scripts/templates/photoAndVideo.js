@@ -1,5 +1,6 @@
 const photoAndVideo = (data) => {
-
+ 
+console.log(data)
     let picture = "";
     let video = null; 
 
@@ -31,6 +32,8 @@ const photoAndVideo = (data) => {
     
 
     const divPhotoAndVideo = document.querySelector('.photographies');
+
+
     const myCard = document.createElement('div');
     const mediaElement = data.video ? video : document.createElement('img'); 
     myCard.classList.add('cardphotographer');

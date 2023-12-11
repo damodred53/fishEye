@@ -36,20 +36,16 @@
         <hr>
         <li class="dropdown_option" role="option" id="filterbytitle" data-order="3">Titre</li>
         </ol>-->
-        <select class="selection" id="options" role="listbox" aria-label="Options">
-          <div>
-            <option class="dropdown_option" role="option" id="filterbypopularity" data-order="1" value="rigatoni">
+        <select class="selection" id="options" role="listbox" aria-label="Options" onchange="displaySort()">
 
-              <p>Popularité</p>
-
-            </option>
-          </div>
-
-          <option class="dropdown_option second_choice" role="option" id="filterbydate" data-order="2" value="dave">
-            <div class="border">Date</div>
+          <option class="dropdown_option" role="option" id="filterbypopularity" data-order="1" value="Popularité">
+            <p>Popularité</p>
           </option>
-          <option class="dropdown_option" role="option" id="filterbytitle" data-order="3" value="pumpernickel">
-            <div>Titre</div>
+          <option class="dropdown_option second_choice" role="option" id="filterbydate" data-order="2" value="Date">
+            <p>Date</p>
+          </option>
+          <option class="dropdown_option" role="option" id="filterbytitle" data-order="3" value="Titre">
+            <p>Titre</p>
           </option>
 
         </select>

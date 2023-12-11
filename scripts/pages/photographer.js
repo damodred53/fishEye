@@ -98,14 +98,9 @@ const displayPhotographer = async (photographers) => {
     }
 
 
-    console.log(arrayNumberOfLikesByArtist);
-    const sumOfLikes = arrayNumberOfLikesByArtist.reduce((acc, likes) => acc + likes, 0)
-    console.log(sumOfLikes);
-    console.log(pricePhotographer);
 
-    /*const searchlikePhotographers = await getPhotographers();*/
-    console.log(searchlikePhotographers);
-    /* à faire : boucle for pour itérer dans search... pour récupérer les prix en lien avec id du photographe */
+    const sumOfLikes = arrayNumberOfLikesByArtist.reduce((acc, likes) => acc + likes, 0)
+
     createAsideBar(pricePhotographer, sumOfLikes);
 
 }
@@ -117,7 +112,6 @@ const fetchPhotographies = async () => {
     const fetch = await getPhotographers()
     console.log(await fetch);
 
-    
 }
 
 fetchPhotographies();
@@ -148,9 +142,9 @@ const MediaPattern = (data) => {
     }
  
 
-const MapData = (data) => {
-    console.log(data)
-    return data.map((elem) => photoAndVideo(elem))
+const MapData = (dataElement) => {
+    console.log(dataElement)
+    return dataElement.map((elem) => photoAndVideo(elem))
 
 }
 
@@ -194,3 +188,111 @@ const getPhotoAndVideos = async () => {
 }
 
 getPhotoAndVideos();
+
+/* Mise en place du tri dans le menu filtrant */
+
+const displaySort = async () => {
+
+    stateSelectionBare = document.querySelector('.selection');
+
+    const photos = await getPhotographers()
+
+    const PhotosBySelections = [];
+    for (let i = 0; i < photos.media.length ; i++) {
+        if (photos.media[i].photographerId == photographerId) {
+            PhotosBySelections.push(photos.media[i])
+        }
+    }
+
+    switch (stateSelectionBare.value) {
+        case 'Popularité':
+            sortByPopularity(PhotosBySelections)
+            break;
+        case 'Date':
+            sortByDate(PhotosBySelections)
+            break;
+        case 'Titre':
+            sortByTitle(PhotosBySelections)
+            break;
+    }
+}
+
+
+const sortByPopularity = (PhotosBySelections) => {
+   
+
+    const sortedPhotosByLikes = PhotosBySelections.sort((a, b) => b.likes - a.likes);
+
+    const existingCards = document.querySelectorAll('.cardphotographer');
+    arrayExistingElement = Array.from(existingCards)
+    console.log(arrayExistingElement)
+        arrayExistingElement.forEach((element) => {
+            element.remove()
+            
+        })
+    
+        MapData(sortedPhotosByLikes) 
+
+}
+
+const sortByTitle = (PhotosBySelections) => {
+    
+    const sortByTitleTest = (a, b) => {
+        const titreA = a.title.toLowerCase();
+        const titreB = b.title.toLowerCase();
+    
+        if (titreA < titreB) {
+            return -1;
+        } else if (titreA > titreB) {
+            return 1;
+        } else {
+            return 0;
+        }
+    };
+    
+    const sortedPhotosByTitles = PhotosBySelections.sort(sortByTitleTest);
+    console.log(sortedPhotosByTitles)
+
+    const existingCards = document.querySelectorAll('.cardphotographer');
+    arrayExistingElement = Array.from(existingCards)
+    console.log(arrayExistingElement)
+        arrayExistingElement.forEach((element) => {
+            element.remove()
+            
+        })
+    
+    MapData(sortedPhotosByTitles) 
+}
+
+const sortByDate = (PhotosBySelections) => {
+
+    const sortByDateTest = (a, b) => {
+        const titreA = new Date(a.date);
+        const titreB = new Date(b.date);
+    
+        if (titreA < titreB) {
+            return -1;
+        } else if (titreA > titreB) {
+            return 1;
+        } else {
+            return 0;
+        }
+    };
+    
+    const sortedPhotosByDates = PhotosBySelections.sort(sortByDateTest);
+    console.log(sortedPhotosByDates)
+
+    const existingCards = document.querySelectorAll('.cardphotographer');
+    arrayExistingElement = Array.from(existingCards)
+    console.log(arrayExistingElement)
+        arrayExistingElement.forEach((element) => {
+            element.remove()
+            
+        })
+    
+    MapData(sortedPhotosByDates) 
+
+}
+
+
+

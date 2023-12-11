@@ -31,8 +31,6 @@ header {
     align-items: center;
 }
 
-
-
 .contact_button {
     font-size: 20px;
     font-weight: bold;
@@ -232,16 +230,6 @@ form input {
 font-weight: 700;
 font-size: 18px;
 border-radius: 10px;
-
-}
-
-.dropdown_option p{
-margin: 2rem;
-}
-
-.border {
-    border: white 1px solid;
-    background-color: blue;
 }
 
 
