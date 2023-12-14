@@ -5,6 +5,8 @@ body {
     max-width: 1440px;
 }
 
+
+
 header {
     display: flex;
     flex-direction: row;
@@ -18,9 +20,7 @@ header {
     margin-left: 100px;
 } 
 
-#contact_modal {
-    display: none;
-}
+
 
 .photograph-header {
     background-color: #FAFAFA;
@@ -31,72 +31,6 @@ header {
     align-items: center;
 }
 
-.contact_button {
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    padding: 11px;
-    width: 170px;
-    height: 70px;
-    border: none;
-    background-color: #901C1C;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.modal {
-    border-radius: 5px;
-    background-color: #DB8876;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 35px;
-    margin: auto;
-}
-
-.modal header {
-    justify-content: space-between;
-    width: 100%;
-}
-
-.modal header img {
-    cursor: pointer;
-}
-
-.modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
-}
-
-form {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-form label {
-    color: #312E2E;
-    font-size: 36px;
-}
-
-form div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
-}
-
-form input {
-    width: 100%;
-    height: 68px;
-    border: none;
-    border-radius: 5px;
-}
 
 /* Intégration de la page phtographer.html */
 
@@ -180,8 +114,6 @@ form input {
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-   
-    /*padding-right: 2rem;*/
     align-items: center;
     width: 12%;
     background-color: #901C1C;
@@ -278,6 +210,12 @@ border-radius: 10px;
     font-size: 18px;
 }
 
+.paragraphphotografermodal {
+    color: #901C1C;
+    font-weight: 400;
+    font-size: 18px;
+}
+
 /* intégration de la barre de tarif de la page photographer */
 
 .aside_bar {
@@ -301,6 +239,54 @@ border-radius: 10px;
     gap: 1rem;
     width: 25%;
 }
+
+
+/* Intégration de la gallerie caroussel */
+
+.divgalerie {
+
+    margin: 2% 10% 5% 10%;
+    width: 80%;
+    height: auto;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.imageGalerie{
+    margin-top: 2%;
+    width: 70vh;
+    height: 80vh;
+    object-fit: cover;
+}
+
+.element_icon {
+    width: 4rem;
+}
+
+
+.arrowprev {
+    position: absolute;
+    top: 40%;
+    left: 20%;
+}
+
+.arrownext {
+    position: absolute;
+    top: 40%;
+    right: 20%;
+}
+
+.cross {
+    position: absolute;
+    top: 10%;
+    right: 20%;
+}
+
+
 
 
 

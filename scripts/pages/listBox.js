@@ -1,5 +1,5 @@
 
-const displayListBox = () => {
+/*const displayListBox = () => {
 
     const buttonHidden = document.querySelector('.sort_button');
     
@@ -7,4 +7,4 @@ const displayListBox = () => {
     rotationArrow.style.transform = 'rotate(180deg)';
     
 
-}
+}*/

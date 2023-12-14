@@ -8,12 +8,15 @@ const asideBarTemplate = async (price, likes) => {
 
     console.log(price, likes);
 
-    paragraph_number_likes.innerText = likes;
+    const numberLikes = paragraph_number_likes.innerText = likes;
     heart.setAttribute('src', "../../assets/icons/black_heart.svg");
     priceArtist.innerText = `${price}€ /jour`;
     aside.classList.add('aside_bar');
     div1.classList.add('paragraph_bar');
+    paragraph_number_likes.classList.add('paragraphnumberlikes');
     /* Intégration dans le DOM */
+
+
 
     const asideBar = document.querySelector('main');
 
@@ -23,4 +26,7 @@ const asideBarTemplate = async (price, likes) => {
     div1.appendChild(paragraph_number_likes);
     div1.appendChild(heart);
 
+
+
 }
+

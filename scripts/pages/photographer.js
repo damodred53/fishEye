@@ -3,6 +3,7 @@
 
 const urlSearchParams = new URLSearchParams(window.location.search)
 const photographerId = urlSearchParams.get('id')
+const pricePhotographer = [];
 
 
 const createPage = async () => {
@@ -82,7 +83,7 @@ const displayPhotographer = async (photographers) => {
     const searchlikePhotographers = await getPhotographers();
 
     const arrayNumberOfLikesByArtist = [];
-    const pricePhotographer = [];
+    
     console.log(photographerId);
 
     for (let i = 0; i<searchlikePhotographers.media.length ; i++) {
@@ -100,6 +101,8 @@ const displayPhotographer = async (photographers) => {
 
 
     const sumOfLikes = arrayNumberOfLikesByArtist.reduce((acc, likes) => acc + likes, 0)
+
+
 
     createAsideBar(pricePhotographer, sumOfLikes);
 
@@ -155,6 +158,13 @@ const createAsideBar = async (data, likes) => {
     asideBarTemplate(data, likes);
 }
 
+/*const updateAsideBar = async (data, likes) => {
+
+    console.log(data);
+    console.log(likes)
+    asideBarTemplate(data, likes + 1);
+}*/
+
 const displayPhotosAndVideo = (data) => {
 
     const arrayElement = [];
@@ -167,7 +177,6 @@ const displayPhotosAndVideo = (data) => {
 
 
     const filteredMedia = arrayElement.filter((elem) => elem.photographerId == photographerId);
-    /*const asideBar = createAsideBar(photographerId)*/
     const mappedData = MapData(filteredMedia);
     
     return filteredMedia
@@ -293,6 +302,13 @@ const sortByDate = (PhotosBySelections) => {
     MapData(sortedPhotosByDates) 
 
 }
+
+
+
+
+
+
+
 
 
 
