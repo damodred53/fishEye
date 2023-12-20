@@ -1,6 +1,5 @@
-const photoAndVideo = (data) => {
- 
-
+const photoAndVideo = (data, index) => {
+  /* template pour la création des images et vidéos pour chaque photograhe */
 
     let picture = "";
     let video = null; 
@@ -14,22 +13,19 @@ const photoAndVideo = (data) => {
         picture = `../../Sample Photos/${nameArtist}/${data.video}`;
         video = document.createElement('video');
         video.src = picture;
-        video.setAttribute('alt', `Vidéo intitulée : ${data.title}`);
-        video.classList.add('video');
-        
+        video.setAttribute('alt', `Vidéo intitulée : ${data.title} cliquez dessus pour la lancer`);
+        video.classList.add('video');  
     }
 
-    
-    
 
     const divPhotoAndVideo = document.querySelector('.photographies');
-
 
     const myCard = document.createElement('div');
     const mediaElement = data.video ? video : document.createElement('img'); 
     myCard.classList.add('cardphotographer');
     mediaElement.src = picture;
     mediaElement.classList.add(data.video ? 'video' : 'imagephotographer'); 
+    mediaElement.setAttribute('alt', `photo intitulée : ${data.title}`);
 
     /* Création de la partie like et titre */
     const underPart = document.createElement('div');
@@ -50,63 +46,54 @@ const photoAndVideo = (data) => {
     paragraph_title.textContent = data.title;
     underPart.classList.add('underpart');
     heart.setAttribute('alt', 'likes');
+    heart.setAttribute('aria-label', 'icone où cliquer pour liker la photo')
 
 
     mediaElement.addEventListener('click', () => {
 
         test2(data)
     })
-
-    const researchHeart = document.querySelectorAll('.heart');
-    
-    for (let i = 0; i < researchHeart.length; i++) {
-        researchHeart[i].id = 1 + i;
-    }
-
-    const numberLikes = document.querySelectorAll('.numberoflikes');
-    const arrayLikes = Array.from(numberLikes)
-    console.log(arrayLikes);
-
-    for (let i = 0; i < arrayLikes.length; i++) {
-        arrayLikes[i].id = 1 + i;
-    }
+    myCard.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            test2(data);
+        }
+    });
 
 
+    /* Intégration de la fonctionnalité permettant de cliquer sur les coeurs pour augmenter les likes */
     heart.addEventListener('click', () => {
 
         if(heart.classList.contains('clicked')) {
+            /* On ne peut cliquer qu'une fois sur un coeur */
             return
         } else {
             let currentLikes = parseInt(numberOfLikes.textContent, 10);
             numberOfLikes.textContent = currentLikes +=1;
-    
+            /* Incrémentation de 1 sur la barre aside */
             const searchParagraph = document.querySelector('.paragraphnumberlikes');
-    
-            
             let currentLikesAsideBar = parseInt(searchParagraph.textContent, 10);
             searchParagraph.textContent = currentLikesAsideBar +=1
             heart.classList.add('clicked');
         }
-       
-
     });
 
-
-
-
    
-    
+    /*navigatePicturesVideoByKeyboard();*/
 
+    /* Gestion de l'accessibilité */
+
+    mediaElement.setAttribute('tabindex', '0');
 
     /* Création du template */
     divPhotoAndVideo.appendChild(myCard);
-    myCard.appendChild(mediaElement);
+    myCard.appendChild(mediaElement);       
     myCard.appendChild(underPart);
     underPart.appendChild(paragraph_title);
     underPart.appendChild(divOfLikes);
     divOfLikes.appendChild(numberOfLikes);
     divOfLikes.appendChild(heart);
 
+    return myCard
 
 };
 
@@ -116,17 +103,19 @@ const photoAndVideo = (data) => {
 
 const test2 = (data) => {
   
+    const researchModal = document.querySelector('#contact_modal');
+    const FormPhotographers  = document.querySelector('.modal');
+    researchModal.style.display = "block";
+    FormPhotographers.style.display = 'none';   
 
-        const researchModal = document.querySelector('#contact_modal');
-        const FormPhotographers  = document.querySelector('.modal');
-        researchModal.style.display = "block";
-        FormPhotographers.style.display = 'none';
-        console.log(data)
-         /*! ne pas oublier de remettre en display block à la fin  !! */
-         createModalGalerie(data);
-         
-    
+    createModalGalerie(data);
+        
 };
+
+
+
+
+
 
 
 

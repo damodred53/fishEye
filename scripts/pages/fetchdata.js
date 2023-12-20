@@ -1,5 +1,5 @@
 async function getPhotographers() {
-
+    /* Aller chercher les données sur les photographes et leurs photos avant de les renvoyer dans la variable data */
     const response = await fetch('../../data/photographers.json')
 
     if (!response.ok) {

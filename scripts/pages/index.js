@@ -1,16 +1,14 @@
    
-
     async function displayData(photographers) {
         const photographersSection = document.querySelector(".photographer_section");
 
+        /* Création des cards de présentation des photographes */
 
         for (let i = 0; i< photographers.length; i++) {
             const photographerModel = photographerTemplate(photographers[i]);
             const userCardDOM = photographerModel.getUserCardDOM();
 
-            console.log(userCardDOM)
-
-            /* personnalisation des cards ainsi crées */
+            /* personnalisation des cards ainsi crées et attribution d'un id en URL */
 
             let currentUrl = new URL('http://127.0.0.1:5500/photographer.html')
             currentUrl.searchParams.set('id', photographers.id);
@@ -19,20 +17,10 @@
 
             link.setAttribute('href', currentUrl.href );
             link.classList.add('link')
-            
-
-
-            /*const link = document.createElement('a');
-            link.setAttribute('href', currentUrl.href );
-            const wrapperPicture = document.createElement('div');
-            wrapperPicture.classList.add('wrapperPicture');
-            wrapperPicture.appendChild(image)*/
 
             photographersSection.appendChild(userCardDOM);
         }
     }
-
-    
 
     async function init() {
         // Récupère les datas des photographes

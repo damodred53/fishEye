@@ -1,6 +1,6 @@
 //Mettre le code JavaScript lié à la page photographer.html
 
-
+/* récupération de l'id du photographe via l'url */
 const urlSearchParams = new URLSearchParams(window.location.search)
 const photographerId = urlSearchParams.get('id')
 const pricePhotographer = [];
@@ -9,9 +9,9 @@ const pricePhotographer = [];
 const createPage = async () => {
     if (photographerId) {
 
-        const photographersProfil = await getPhotographers(photographerId)
-        const selectedPhotographers = await selectPhotographerById(photographersProfil.photographers)
-        const displayedPhotographer = await displayPhotographer(selectedPhotographers);
+        const photographersProfil = await getPhotographers();
+        const selectedPhotographers = await selectPhotographerById(photographersProfil.photographers);
+        displayPhotographer(selectedPhotographers);
      } else {
         throw new Error('l\'url n\'a pas permis d\'identifier un photpographe');
      }
@@ -23,6 +23,7 @@ createPage();
 const selectPhotographerById = async (data)  => {
 
     let photographerToDisplay = []
+    /* récupération de l'id contenu dans l'url et mise dans le tableau photographerToDisplay*/
     const photographerSelected = window.location.href.split('=').reverse()[0]
 
     for (let i = 0; i< data.length; i++) {
@@ -44,12 +45,12 @@ const selectPhotographerById = async (data)  => {
 }
 
 const displayPhotographer = async (photographers) => {
+    /* création du profil sur la page d'un photographe */
     const photographerProfil = document.querySelector('.photograph-header');
     const photographerModel = photographerTemplate(photographers[0]);
     const photographerCardDOM = photographerModel.getUserCardDOM();
     photographerProfil.appendChild(photographerCardDOM);
 
-    
     const image = document.querySelector('.wrapperpicture');
     const h2 = document.querySelector('.h2');
 
@@ -61,10 +62,15 @@ const displayPhotographer = async (photographers) => {
     const tag = document.querySelector('.tag');
     const price = document.querySelector('.pricephotographer');
     const article = document.querySelector('.article');
-    article.remove();
+    
     price.classList.add('price');
+
+    /*Retrait des éléments du template photographer inutils */
+    article.remove();
     linkToRemove.remove();
 
+    /* Gestion de l'accessibilité */
+    photographerProfil.focus();
 
 
     /* Création d'une div pour mettre en colonne les éléments générés sur le DOM */
@@ -79,91 +85,68 @@ const displayPhotographer = async (photographers) => {
 
     photographerProfil.classList.add('flexbox_profil');
 
+
+
     /* Création de la barre aside */
     const searchlikePhotographers = await getPhotographers();
 
     const arrayNumberOfLikesByArtist = [];
     
-    console.log(photographerId);
 
+/* récupération des likes par photographies */
     for (let i = 0; i<searchlikePhotographers.media.length ; i++) {
         if (searchlikePhotographers.media[i].photographerId == photographerId) {
             arrayNumberOfLikesByArtist.push(searchlikePhotographers.media[i].likes)
-        } ;
+        }
     }
-
+/* récupération du prix à la journée du photographe */
     for (let i = 0; i<searchlikePhotographers.photographers.length ; i++) {
         if (searchlikePhotographers.photographers[i].id == photographerId) {
             pricePhotographer.push(searchlikePhotographers.photographers[i].price)
-        } ;
+        }
     }
 
-
-
     const sumOfLikes = arrayNumberOfLikesByArtist.reduce((acc, likes) => acc + likes, 0)
-
-
 
     createAsideBar(pricePhotographer, sumOfLikes);
 
 }
 
-/* intégration de la partie photographie-gallery pour chaque photographe */
 
-const fetchPhotographies = async () => {
-
-    const fetch = await getPhotographers()
-    console.log(await fetch);
-
-}
-
-fetchPhotographies();
 
 /* Intégration des photographies et des vidéos du photographe dont on est sur la page */
 
 const MediaPattern = (data) => {
-
-    let Instance = {};
+    /* tri des données (data) pour déterminer si ils 'agit de photos ou de vidéos */
+    let instance = {};
 
             if (data.image) {
 
-                const Instance =  new Photo(data)
-
-                /*console.log(photoInstance)*/
+                new Photo(data);
 
             } else if (data.video) {
 
-
-                const Instance =  new Video(data)
-                /*console.log(videoInstance)*/
+                new Video(data);
 
             } else {
                 throw 'Unknown type format'
             }
-        return Instance;
+
+        return instance;
       
     }
  
 
-const MapData = (dataElement) => {
-    console.log(dataElement)
-    return dataElement.map((elem) => photoAndVideo(elem))
-
+const MapData = async (dataElement) => {
+    /* Envoi d'un mappage des données vers le template photoAndVideo */
+    await dataElement.map((elem, index) => photoAndVideo(elem, index))
+    
 }
 
 const createAsideBar = async (data, likes) => {
-
-    console.log(data);
-    console.log(likes)
+    /* appel de la fonction asideBar pour y afficher les éléments nécessaires */ 
     asideBarTemplate(data, likes);
 }
-
-/*const updateAsideBar = async (data, likes) => {
-
-    console.log(data);
-    console.log(likes)
-    asideBarTemplate(data, likes + 1);
-}*/
 
 const displayPhotosAndVideo = (data) => {
 
@@ -172,9 +155,6 @@ const displayPhotosAndVideo = (data) => {
         const MediaInstance = MediaPattern(element);
         arrayElement.push(element)
     });
-    
-    console.log(arrayElement)
-
 
     const filteredMedia = arrayElement.filter((elem) => elem.photographerId == photographerId);
     const mappedData = MapData(filteredMedia);
@@ -183,37 +163,39 @@ const displayPhotosAndVideo = (data) => {
 }
 
 const getPhotoAndVideos = async () => {
-
+/* Récupération des données concernant les photographes et les photographies */
     const fetchPhotosAndVideo = await getPhotographers();
     if (!fetchPhotosAndVideo) {
         throw new Error('Impossible de se connecter aux photos et aux vidéos');
     } else {
-
-        const sortedMedia = displayPhotosAndVideo(fetchPhotosAndVideo.media);
-
+        displayPhotosAndVideo(fetchPhotosAndVideo.media);
     }
 
-  
 }
 
 getPhotoAndVideos();
 
 /* Mise en place du tri dans le menu filtrant */
 
-const displaySort = async () => {
+const displaySort = async (e) => {
 
-    stateSelectionBare = document.querySelector('.selection');
+const value = e.target.innerText
+    stateSelectionBare = document.querySelectorAll('.dropdown_option');
 
     const photos = await getPhotographers()
 
     const PhotosBySelections = [];
+    
     for (let i = 0; i < photos.media.length ; i++) {
         if (photos.media[i].photographerId == photographerId) {
             PhotosBySelections.push(photos.media[i])
         }
     }
 
-    switch (stateSelectionBare.value) {
+
+    
+    /* switch représentants les trois options possibles du menu déroulant */
+    switch (value) {
         case 'Popularité':
             sortByPopularity(PhotosBySelections)
             break;
@@ -225,16 +207,14 @@ const displaySort = async () => {
             break;
     }
 }
-
-
+/* Dans le menu déorulant trie des photographies par nombre de like */
 const sortByPopularity = (PhotosBySelections) => {
    
-
     const sortedPhotosByLikes = PhotosBySelections.sort((a, b) => b.likes - a.likes);
 
     const existingCards = document.querySelectorAll('.cardphotographer');
     arrayExistingElement = Array.from(existingCards)
-    console.log(arrayExistingElement)
+
         arrayExistingElement.forEach((element) => {
             element.remove()
             
@@ -244,6 +224,7 @@ const sortByPopularity = (PhotosBySelections) => {
 
 }
 
+/* Dans le menu déorulant, tri des images par ordre alphabétique */
 const sortByTitle = (PhotosBySelections) => {
     
     const sortByTitleTest = (a, b) => {
@@ -259,12 +240,12 @@ const sortByTitle = (PhotosBySelections) => {
         }
     };
     
+
     const sortedPhotosByTitles = PhotosBySelections.sort(sortByTitleTest);
-    console.log(sortedPhotosByTitles)
+
 
     const existingCards = document.querySelectorAll('.cardphotographer');
     arrayExistingElement = Array.from(existingCards)
-    console.log(arrayExistingElement)
         arrayExistingElement.forEach((element) => {
             element.remove()
             
@@ -272,7 +253,7 @@ const sortByTitle = (PhotosBySelections) => {
     
     MapData(sortedPhotosByTitles) 
 }
-
+/* dans le menu déroulant, tri des images par date */
 const sortByDate = (PhotosBySelections) => {
 
     const sortByDateTest = (a, b) => {
@@ -289,11 +270,10 @@ const sortByDate = (PhotosBySelections) => {
     };
     
     const sortedPhotosByDates = PhotosBySelections.sort(sortByDateTest);
-    console.log(sortedPhotosByDates)
 
     const existingCards = document.querySelectorAll('.cardphotographer');
     arrayExistingElement = Array.from(existingCards)
-    console.log(arrayExistingElement)
+
         arrayExistingElement.forEach((element) => {
             element.remove()
             
@@ -302,6 +282,77 @@ const sortByDate = (PhotosBySelections) => {
     MapData(sortedPhotosByDates) 
 
 }
+
+const toggleList = () => {
+    const AllSelectionDropList = document.querySelectorAll('.hidden_part');
+    const cursorIcon = document.querySelector('.sort_button_img');
+    
+
+/* Gestion du clique pour les éléments de la droplist cachés */
+AllSelectionDropList.forEach((elem) => {
+        if (elem.classList.contains('hidden')){
+            elem.classList.remove('hidden');
+            cursorIcon.style.transform = 'rotate(180deg)';
+            elem.addEventListener('click', (e) => {
+                displaySort(e)})
+            elem.addEventListener('keydown', (e) => {
+                const keyCode = e.key;
+                if (keyCode == 'Enter') {
+                    displaySort(e)      
+                }
+            })
+        } else if (!elem.classList.contains('hidden')) {
+            elem.classList.add('hidden');
+            cursorIcon.style.transform = 'rotate(0deg)';
+        }
+        
+    })
+
+}
+
+/* interaction avec l'icone de défilement pour faire apparaitre les options */
+const toggleDropDown = document.querySelector('.sort_button_img')
+toggleDropDown.setAttribute('alt', 'curseur pour actionner le menu déroulant');
+if (toggleDropDown) {
+    toggleDropDown.addEventListener('click', (e) => {
+        toggleList(e);   
+    })
+
+    if (toggleDropDown) {
+        toggleDropDown.addEventListener('keydown', (e) => { 
+            const keyCode = e.key;
+
+            if (keyCode === 'Enter') {
+                toggleList(e);
+            }
+        })
+    }
+    
+}
+
+const firstOption = document.querySelector('.first_choice');
+
+/* Gestion du clique pour les éléments de la droplist visible */
+if (firstOption) {
+    firstOption.addEventListener('click', (e) => {
+        displaySort(e)})
+
+    firstOption.addEventListener('keydown', (e) => {
+    const keyCode = e.key;
+    if (keyCode == 'Enter') {
+        displaySort(e)      
+    }
+    })
+}
+
+
+
+
+
+
+
+
+
 
 
 

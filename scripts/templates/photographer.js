@@ -1,5 +1,7 @@
 function photographerTemplate(photographers) {
-    console.log(photographers)
+
+/* Template de création des cards des photographes sur la page principale */
+
     const portrait = photographers.portrait
     const city = photographers.city;
     const country = photographers.country;
@@ -28,15 +30,17 @@ function photographerTemplate(photographers) {
         article.classList.add('article');
         img.classList.add('img');
         img.setAttribute("src", picture);
-        img.setAttribute("alt", `photo de ${name}`);
+        img.setAttribute("alt", `${name}`);
         wrapperPicture.classList.add('wrapperpicture');
         h2.classList.add("h2");
         cityAndCountry.classList.add('cityandcountry');
         tag.classList.add('tag');
         pricePhotographer.classList.add('pricephotographer');
         link.classList.add('link')
+        link.setAttribute('aria-label', `cliquer pour aller à la page de ${name}` );
         
         h2.textContent = name;
+        h2.setAttribute('aria-label', `nom du photographe : ${name}`);
         cityAndCountry.innerHTML = `${city}, ${country}`; 
         tag.innerHTML = tagline;
 
@@ -44,7 +48,6 @@ function photographerTemplate(photographers) {
         pricePhotographer.innerHTML = `${price}€/jour`
 
         link.setAttribute('href', currentUrl.href );
-
 
         article.appendChild(link);
         link.appendChild(wrapperPicture)

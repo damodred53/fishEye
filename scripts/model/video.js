@@ -1,5 +1,5 @@
 class Video {
-
+/* Génération d'un objet photo dnas lequel sont mappés les photographies */
     constructor(id,photographerId,title,video,likes,date,price) {
         this.id = id;
         this.photographerId = photographerId;
@@ -9,7 +9,4 @@ class Video {
         this.date = date;
         this.price = price;
     }
-
-
-
 }

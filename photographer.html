@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
   <link href="css/photographer.css" rel="stylesheet" type="text/css" />
@@ -13,43 +13,35 @@
 <body>
   <header>
     <a href="index.html" aria-label="cliquez pour revenir à la page d'accueil">
-      <img src="assets/images/logo.png" class="logo" />
+      <img src="assets/images/logo.png" class="logo" alt="fisheye logo" />
     </a>
   </header>
   <main id="main">
 
 
     <div class="photograph-header">
-      <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+      <button class="contact_button" onclick="displayModal()" aria-label="Contactez-moi">Contactez-moi</button>
     </div>
 
     <div class="sort_picture">
       <p class="sort_paragraph">Trier par</p>
 
-      <div class="sort_button">
-        <!--<ol id=" options" class="dropdown_menu" role="listbox" aria-label="Options">
-        <li class="dropdown_option" role="option" id="filterbypopularity" data-order="1">Popularité
-          <button type="checkbox" onclick="displayListBox()" /><img class=" sort_button_img"
-            src=" ./assets/icons/arrow_2.svg">
-        </li>
-        <hr>
-        <li class="dropdown_option" role="option" id="filterbydate" data-order="2">Date</li>
-        <hr>
-        <li class="dropdown_option" role="option" id="filterbytitle" data-order="3">Titre</li>
-        </ol>-->
-        <select class="selection" id="options" role="listbox" aria-label="Options" onchange="displaySort()">
-
-          <option class="dropdown_option" role="option" id="filterbypopularity" data-order="1" value="Popularité">
-            <p>Popularité</p>
-          </option>
-          <option class="dropdown_option second_choice" role="option" id="filterbydate" data-order="2" value="Date">
-            <p>Date</p>
-          </option>
-          <option class="dropdown_option" role="option" id="filterbytitle" data-order="3" value="Titre">
-            <p>Titre</p>
-          </option>
-
-        </select>
+      <div class="sort_button" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="options">
+        <ol id="options" class="dropdown_menu" role="listbox" aria-label="Options">
+          <li class="dropdown_option first_choice" role="option" tabindex="0" id="filterbypopularity" data-order="1"
+            value="Popularité">Popularité
+            <img class=" sort_button_img" tabindex="0" src=" ./assets/icons/arrow_2.svg">
+          </li>
+          <li class="divider hidden_part hidden" role="separator"></li>
+          <li class="dropdown_option hidden_part hidden border" role="option" tabindex="0" id="filterbydate"
+            data-order="2" value="Date">
+            Date</li>
+          <li class="divider hidden_part hidden" role="separator"></li>
+          <li class="dropdown_option hidden_part hidden border" role="option" tabindex="0" id="filterbytitle"
+            data-order="3" value="Titre">
+            Titre
+          </li>
+        </ol>
       </div>
 
 
@@ -60,7 +52,7 @@
 
 
 
-    <section class="photographies">
+    <section class="photographies" aria-label="photographies et vidéo du photographe" role="region">
 
     </section>
 
@@ -76,32 +68,41 @@
     <div class="modal">
       <header>
         <h2>Contactez-moi</h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" />
+        <img src="assets/icons/close.svg" onclick="closeModal()" role="close the form " aria-label="cliquer pour fermer"
+          class="crossElement" />
       </header>
-      <form onsubmit="handleSubmit(event)">
+      <form onsubmit="handleSubmit(event) " aria-label="formulaire de contact pour envoyer un mail à l'artiste">
 
-        <div class="formData">
+
+        <div class="formData" aria-labelledby="prénom">
           <label for="first">Prénom</label>
-          <input class="text-control" type="text" id="first" name="first" onchange="handleChange()">
+          <input class="text-control" type="text" id="first" name="first" onchange="handleChange()"
+            aria-label="endroit où indiquer son prénom" aria-required=true aria-invalid="true">
           <p class="firstname_error error">Votre prénom doit contenir au minimum deux caractères</p>
         </div>
-        <div class="formData">
+        <div class="formData" aria-labelledby="nom">
           <label for="last">Nom</label>
-          <input class="text-control " type="text" id="last" name="last">
+          <input class="text-control " type="text" id="last" name="last"
+            aria-label="endroit où indiquer son nom de famille" aria-required=true aria-invalid="true">
           <p class="familyname_error error">Votre nom de famille doit contenir au minimum deux caractères</p>
         </div>
-        <div class="formData">
+        <div class="formData" aria-labelledby="email">
           <label for="email">E-mail</label>
-          <input class="text-control " type="email" id="email" name="email">
+          <input class="text-control " type="email" id="email" name="email"
+            aria-label="endroit où indiquer son adresse email" aria-required=true aria-invalid="true">
           <p class="email_error error">Votre adresse email n'est pas valide</p>
         </div>
+
+
         <div class="formData">
           <label for="email">Votre message</label>
-          <input class="text-control text_area " type="text" id="message" name="message">
+          <input class="text-control text_area " type="text" id="message" name="message"
+            aria-label="endroit où écrire le message qu'on souhaite envoyer au photographe" aria-required=true
+            aria-invalid="true">
           <p class="message_error error">Veuillez écrire votre message</p>
         </div>
 
-        <button class="contact_button">Envoyer</button>
+        <button class="contact_button" aria-label="boutton pour envoyer votre message">Envoyer</button>
       </form>
     </div>
   </div>
@@ -112,14 +113,8 @@
   <script src="scripts/model/photo.js"></script>
   <script src="scripts/model/video.js"></script>
   <script src="scripts/pages/fetchdata.js"></script>
-  <script src="scripts/pages/listBox.js"></script>
   <script src="scripts/templates/photographer.js"></script>
-
-
-
-
   <script src="scripts/pages/photographer.js"></script>
-
   <script src="scripts/utils/contactForm.js"></script>
   <script src="scripts/templates/photographer.js"></script>
 </body>
