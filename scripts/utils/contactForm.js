@@ -30,14 +30,9 @@ function displayModal() {
   crossElement.focus();
     const modal = document.getElementById("contact_modal");
 
-    const main = document.querySelector('#main');
-
-
-    
-
     const modal2 = document.querySelector(".modal");
     modal2.style.display = "block";
-	  modal.style.display = "block";
+    modal.style.display = "block";
     const emptyForm = document.querySelectorAll('.text-control');
 
     emptyForm.forEach((elem) => {
@@ -47,9 +42,8 @@ function displayModal() {
     
     modal2.setAttribute('aria-describedby', 'modal dédiée à l\'envoi d\'un message au photographe');
  
-    /* intégration pour fermer la modale avec la touche Échap */
 
-    document.addEventListener('keydown', (e) => closeModalByKeyboard(e))
+
 
 }
 
@@ -64,7 +58,6 @@ function closeModal() {
     const ariaRemovedHeader = document.querySelector('.flexbox_profil');
     const ariaRemovedSort = document.querySelector('.sort_picture');
     const ariaRemovedPhotographies = document.querySelector('.photographies');
-    const ariaRemovedAside = document.querySelector('.aside_bar');
     const ariaRemovedButton = document.querySelector('.sort_button');
     const ariaRemovedSelection = document.querySelector('.sort_button');
 
@@ -78,8 +71,7 @@ function closeModal() {
     modal.removeAttribute('role');
     modal.removeAttribute('aria-describedby');
     modal2.removeAttribute('aria-describedby')
-    const main = document.querySelector('#main');
-    main.focus();
+
   
 
     if (closingCarousel) {
@@ -149,7 +141,7 @@ const handleChange = () => {
     /* Vérification de la validité de l'adresse email */
     const email = document.querySelector('#email');
     const emailToValidate = email.value;
-    const emailReg = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/i)
+    const emailReg = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/i)
     const isEmailValid =  emailReg.test(emailToValidate)
     if (!isEmailValid) {
     document.querySelector('.email_error').style.display = "block";

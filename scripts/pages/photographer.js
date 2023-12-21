@@ -151,13 +151,13 @@ const createAsideBar = async (data, likes) => {
 const displayPhotosAndVideo = (data) => {
 
     const arrayElement = [];
-    const MappedData = data.map((element) => {
-        const MediaInstance = MediaPattern(element);
+    data.map((element) => {
+        MediaPattern(element);
         arrayElement.push(element)
     });
 
     const filteredMedia = arrayElement.filter((elem) => elem.photographerId == photographerId);
-    const mappedData = MapData(filteredMedia);
+    MapData(filteredMedia);
     
     return filteredMedia
 }

@@ -7,14 +7,13 @@ const asideBarTemplate = async (price, likes) => {
     const heart = document.createElement('img');
     const priceArtist = document.createElement('p');
 
-    const numberLikes = paragraph_number_likes.innerText = likes;
+    paragraph_number_likes.innerText = likes;
     heart.setAttribute('src', "../../assets/icons/black_heart.svg");
     heart.setAttribute('alt', 'image de coeur symbolisant les likes');
     priceArtist.innerText = `${price}€ /jour`;
     aside.classList.add('aside_bar');
     div1.classList.add('paragraph_bar');
     paragraph_number_likes.classList.add('paragraphnumberlikes');
-
 
     /* Intégration dans le DOM */
 

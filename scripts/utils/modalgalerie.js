@@ -1,11 +1,11 @@
 const createModalGalerie = async (data) => {
-
+console.log(data)
     /* Génération de la première page du carousel */
     const contactModal = document.querySelector('#contact_modal');
     const photos = await getPhotographers();
     const slide = photos.media.filter((media) => media.photographerId == photographerId);
 
-        /* gestion des aria-hidden pour l'accessibilité */
+    /* gestion des aria-hidden pour l'accessibilité */
     const ariaRemovedHeader = document.querySelector('.flexbox_profil');
     const ariaRemovedSort = document.querySelector('.sort_picture');
     const ariaRemovedPhotographies = document.querySelector('.photographies');
@@ -19,7 +19,6 @@ const createModalGalerie = async (data) => {
     contactModal.setAttribute('role', 'dialog');
     contactModal.setAttribute('aria-describedby', 'modal dédiée à la consultation des photographies et des vidéos');
 
-    const imagePaths = [];
     const nameArtistBlock = document.querySelector('.h2');
     const nameArtist = nameArtistBlock.textContent;
 
@@ -42,9 +41,11 @@ const createModalGalerie = async (data) => {
     const boutonNext = document.createElement('img');
     const crossElement = document.createElement('img');
 
+
+
     boutonPrev.classList.add('element_icon', 'arrowprev');
     boutonNext.classList.add('element_icon', 'arrownext');
-    crossElement.classList.add('element_icon', 'cross');
+    crossElement.classList.add('cross');
 
     crossElement.src = '../../assets/icons/cross.svg';
     boutonPrev.src = '../../assets/icons/prev.svg';
@@ -56,7 +57,7 @@ const createModalGalerie = async (data) => {
 
     /* prise en compte de l'accessibilité */
 
-    cardPhotographer = document.querySelectorAll('.cardphotographer');
+    const cardPhotographer = document.querySelectorAll('.cardphotographer');
     cardPhotographer.forEach((elem) => {
         elem.setAttribute('tabindex', '-1');
     })
@@ -69,11 +70,14 @@ const createModalGalerie = async (data) => {
     divGallerie.focus();
     const arrowPrevKeyboard = document.querySelector('.arrowprev');
     const arrowNextKeyboard = document.querySelector('.arrownext');
-    /*const crossClosal = document.querySelector('.cross');*/       
+    
+    crossElement.setAttribute('aria-label', "icone pour fermer la gallerie");
+    boutonNext.setAttribute('aria-label', 'vers l\'image suivante');
+    boutonPrev.setAttribute('aria-label', 'vers l\'image précédente');
+    /*img.setAttribute('aria-label', data.title)*/
+
     crossElement.setAttribute('tabindex','1')
     arrowPrevKeyboard.setAttribute('tabindex', '2');    
-   
-
     img.setAttribute('tabindex', '3');
     video.setAttribute('tabindex', '3');
     arrowNextKeyboard.setAttribute('tabindex', '4');
@@ -90,6 +94,9 @@ const createModalGalerie = async (data) => {
     // Initialiser currentIndex avec l'index de l'image cliquée
     let currentIndex = clickedImageIndex >= 0 ? clickedImageIndex : 0;
 
+
+
+// Fonction pour modifier dynamiquement la galerie //
     const updateCarousel = () => {
         const imageGalerie = document.querySelector('.imageGalerie');
         const paragraph = document.querySelector('.paragraphphotografermodal');
@@ -134,8 +141,11 @@ const createModalGalerie = async (data) => {
             })
         }
 
+        /*arrowPrevKeyboard.addEventListener('keydown', (e) => goingLeft(e));
+        arrowNextKeyboard.addEventListener('keydown', (e) => goingRight(e));*/
+
         title.innerText = currentSlide.title;
-        divGallerie.appendChild(title);
+        divGallerie.appendChild(title); 
     };
 
     crossElement.addEventListener('click', () => {
@@ -150,6 +160,8 @@ const createModalGalerie = async (data) => {
         updateCarousel();
     });
 
+
+
     boutonNext.addEventListener('click', () => {
         nextSlide();
         updateCarousel();
@@ -162,23 +174,7 @@ const createModalGalerie = async (data) => {
     const nextSlide = () => {
         currentIndex = (currentIndex + 1) % slide.length;
     };
-    const goingLeft = (e) => {
-        
-        const keyCode = e.key;
-        if (keyCode == 'ArrowLeft') {
-            prevSlide();  
-            updateCarousel();
-        }         
-    }
-
-    const goingRight = (e) => {
-        
-        const keyCode = e.key;
-        if (keyCode == 'ArrowRight') {
-            nextSlide();  
-            updateCarousel();
-        }         
-    }   
+    
 
    
 
@@ -192,3 +188,23 @@ const closeModalByKeyboard = (e) => {
         closeModal();
     }
 }
+
+const goingLeft = (e) => {
+        
+    const keyCode = e.key;
+    console.log(keyCode)
+    if (keyCode === 'ArrowLeft') {
+        prevSlide();  
+        updateCarousel();
+    }         
+}
+
+const goingRight = (e) => {
+    
+    const keyCode = e.key;
+    console.log(keyCode)
+    if (keyCode === 'ArrowRight') {
+        nextSlide();  
+        updateCarousel();
+    }         
+}   

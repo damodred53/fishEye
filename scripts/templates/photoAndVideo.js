@@ -1,4 +1,4 @@
-const photoAndVideo = (data, index) => {
+const photoAndVideo = (data) => {
   /* template pour la création des images et vidéos pour chaque photograhe */
 
     let picture = "";
