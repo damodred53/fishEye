@@ -2,8 +2,8 @@
 <html lang="fr">
 
 <head>
-  <link href="css/photographer.css" rel="stylesheet" type="text/css" />
-  <link href="css/modal.css" rel="stylesheet" type="text/css" />
+  <link href="css/photographer.css" rel="stylesheet" type="text/css">
+  <link href="css/modal.css" rel="stylesheet" type="text/css">
   <meta charset="utf-8">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
 <body>
   <header>
     <a href="index.html" aria-label="cliquez pour revenir à la page d'accueil">
-      <img src="assets/images/logo.png" class="logo" alt="fisheye logo" />
+      <img src="assets/images/logo.png" class="logo" alt="fisheye logo">
     </a>
   </header>
   <main id="main">
@@ -28,17 +28,19 @@
 
       <div class="sort_button" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="options">
         <ol id="options" class="dropdown_menu" role="listbox" aria-label="Options">
-          <li class="dropdown_option first_choice" role="option" tabindex="0" id="filterbypopularity" data-order="1"
-            value="Popularité">Popularité
-            <img class=" sort_button_img" tabindex="0" src=" ./assets/icons/arrow_2.svg">
+          <li class="dropdown_option first_choice" role="option" tabindex="0" id="filterbypopularity" data-order="1">
+            Popularité
+            <img class="sort_button_img" tabindex="0" src=" ./assets/icons/arrow_2.svg"
+              alt="curseur pour filtrer le menu déroulant">
           </li>
           <li class="divider hidden_part hidden" role="separator"></li>
           <li class="dropdown_option hidden_part hidden border" role="option" tabindex="0" id="filterbydate"
-            data-order="2" value="Date">
-            Date</li>
+            data-order="2">
+            Date
+          </li>
           <li class="divider hidden_part hidden" role="separator"></li>
           <li class="dropdown_option hidden_part hidden border" role="option" tabindex="0" id="filterbytitle"
-            data-order="3" value="Titre">
+            data-order="3">
             Titre
           </li>
         </ol>
@@ -52,14 +54,14 @@
 
 
 
-    <section class="photographies" aria-label="photographies et vidéo du photographe" role="region">
+    <section class="photographies" aria-label="photographies et vidéo du photographe">
 
     </section>
 
     <p class="bonus_label">
       <a href="https://websiteaccessibilitychecker.com/checker/index.php?uri=referer&gid=WCAG2-AA">
         <img src="https://websiteaccessibilitychecker.com/images/icon_W2_aa.jpg" alt="WCAG 2.0 (Level AA)" height="32"
-          width="102" />
+          width="102">
       </a>
     </p>
 
@@ -73,19 +75,19 @@
     <div class="modal">
       <header>
         <h2>Contactez-moi</h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" role="close the form " aria-label="cliquer pour fermer"
-          class="crossElement" />
+        <img src="assets/icons/close.svg" onclick="closeModal()" role="button" aria-label="cliquer pour fermer"
+          class="crossElement" alt="Croix pour fermer le formulaire">
       </header>
       <form onsubmit="handleSubmit(event) " aria-label="formulaire de contact pour envoyer un mail à l'artiste">
 
 
-        <div class="formData" aria-labelledby="prénom">
+        <div class="formData" aria-labelledby="first">
           <label for="first">Prénom</label>
           <input class="text-control" type="text" id="first" name="first" onchange="handleChange()"
             aria-label="endroit où indiquer son prénom" aria-required=true aria-invalid="true">
           <p class="firstname_error error">Votre prénom doit contenir au minimum deux caractères</p>
         </div>
-        <div class="formData" aria-labelledby="nom">
+        <div class="formData" aria-labelledby="last">
           <label for="last">Nom</label>
           <input class="text-control " type="text" id="last" name="last"
             aria-label="endroit où indiquer son nom de famille" aria-required=true aria-invalid="true">
@@ -99,7 +101,7 @@
         </div>
 
 
-        <div class="formData">
+        <div class="formData" aria-labelledby="message">
           <label for="email">Votre message</label>
           <input class="text-control text_area " type="text" id="message" name="message"
             aria-label="endroit où écrire le message qu'on souhaite envoyer au photographe" aria-required=true
