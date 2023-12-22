@@ -69,8 +69,7 @@ const displayPhotographer = async (photographers) => {
     article.remove();
     linkToRemove.remove();
 
-    /* Gestion de l'accessibilité */
-    photographerProfil.focus();
+
 
 
     /* Création d'une div pour mettre en colonne les éléments générés sur le DOM */

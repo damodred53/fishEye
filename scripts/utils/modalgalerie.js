@@ -74,8 +74,9 @@ const createModalGalerie = async (data) => {
         
         crossElement.setAttribute('aria-label', "icone pour fermer la gallerie");
         boutonNext.setAttribute('aria-label', 'vers l\'image suivante');
-        boutonPrev.setAttribute('aria-label', 'vers l\'image précédente');
-        /*img.setAttribute('aria-label', data.title)*/
+        boutonPrev.setAttribute('aria-label', 'vers l\'image précédente');          
+        boutonNext.setAttribute('alt', 'vers l\'image suivante');
+        boutonPrev.setAttribute('alt', 'vers l\'image précédente');
     
         crossElement.setAttribute('tabindex','1')
         arrowPrevKeyboard.setAttribute('tabindex', '2');    
@@ -115,7 +116,6 @@ const createModalGalerie = async (data) => {
             const newVideoPath = `../../Sample Photos/${nameArtist}/${currentSlide.video}`;
             if (currentSlide.image) {
                 img.setAttribute('src', newImagePath);
-                img.setAttribute('aria-hidden', 'true');
                 img.setAttribute('aria-label', currentSlide.image);
                 img.setAttribute('alt', currentSlide.image);
                 divGallerie.appendChild(img);

@@ -18,7 +18,7 @@ const asideBarTemplate = async (price, likes) => {
     /* Intégration dans le DOM */
 
     const asideBar = document.querySelector('main');
-    asideBar.setAttribute('aria-label', 'barre d\'information pour le nombre de likes et le prix à la journée' );
+    aside.setAttribute('aria-label', 'barre d\'information pour le nombre de likes et le prix à la journée' );
     asideBar.appendChild(aside);
     aside.appendChild(div1);
     aside.appendChild(priceArtist);

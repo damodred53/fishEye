@@ -1,6 +1,6 @@
 const photoAndVideo = (data) => {
   /* template pour la création des images et vidéos pour chaque photograhe */
-
+console.log(data)
     let picture = "";
     let video = null; 
 
@@ -26,7 +26,7 @@ const photoAndVideo = (data) => {
     mediaElement.src = picture;
     mediaElement.classList.add(data.video ? 'video' : 'imagephotographer'); 
     mediaElement.setAttribute('alt', `photo intitulée : ${data.title}`);
-
+    
     /* Création de la partie like et titre */
     const underPart = document.createElement('div');
     const paragraph_title = document.createElement('p');

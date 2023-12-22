@@ -17,6 +17,8 @@ function displayModal() {
   ariaRemovedButton.setAttribute('aria-hidden', "true");
 
 
+
+
   ariaRemovedHeader.setAttribute('tabindex', '-1');           
   ariaRemovedSort.setAttribute('tabindex', '-1');  
   ariaRemovedPhotographies.setAttribute('tabindex', '-1');  
@@ -26,8 +28,10 @@ function displayModal() {
 
   const crossElement = document.querySelector('.crossElement');
   crossElement.setAttribute('tabindex', '0');
+  
   crossElement.addEventListener('keydown', (e) => closureModalByKeyDown(e));
-  crossElement.focus();
+
+  
     const modal = document.getElementById("contact_modal");
 
     const modal2 = document.querySelector(".modal");
@@ -96,7 +100,7 @@ const handleSubmit = (e) => {
     const messageContent = document.querySelector('#message');
 
     console.log(`Voici le contenu du formulaire : le prénom est ${surname.value}, le nom de famille est
-    ${lastname.value} l'adresse e-mail est ${email.valuer} et enfin le contenu du message est ${messageContent.value}`)
+    ${lastname.value} l'adresse e-mail est ${email.value} et enfin le contenu du message est ${messageContent.value}`)
       /*Fermeture de la modale une fois le formulaire validé */
     closeModal();
     } else {
@@ -192,5 +196,18 @@ const closureModalByKeyDown = (e) => {
   }
 }
 
+/*const focusForm = () => {
+  const Form = document.querySelector('.contact_modal');
+  if (Form.style.display = 'block') {
+    const crossElementForm = document.querySelector('.crossElement');
 
+    // Ajoutez un écouteur d'événements transitionend pour détecter la fin de l'animation
+    Form.addEventListener('transitionend', () => {
+      // Mettez le focus sur l'élément crossElementForm une fois l'animation terminée
+      crossElementForm.focus();
+    }, { once: true }); // L'option { once: true } assure que l'écouteur sera supprimé après sa première exécution
+  }
+};
 
+// Appelez focusForm après l'ouverture de la modale
+focusForm();*/
