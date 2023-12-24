@@ -1,5 +1,6 @@
 //Mettre le code JavaScript lié à la page photographer.html
 
+ 
 /* récupération de l'id du photographe via l'url */
 const urlSearchParams = new URLSearchParams(window.location.search)
 const photographerId = urlSearchParams.get('id')
@@ -179,7 +180,7 @@ getPhotoAndVideos();
 const displaySort = async (e) => {
 
 const value = e.target.innerText
-    stateSelectionBare = document.querySelectorAll('.dropdown_option');
+    /*stateSelectionBare = document.querySelectorAll('.dropdown_option');*/
 
     const photos = await getPhotographers()
 

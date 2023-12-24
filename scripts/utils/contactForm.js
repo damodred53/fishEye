@@ -1,3 +1,4 @@
+
 function displayModal() {
   /* Intégration du formulaire qui apparait dans une modale */
 
@@ -196,18 +197,3 @@ const closureModalByKeyDown = (e) => {
   }
 }
 
-/*const focusForm = () => {
-  const Form = document.querySelector('.contact_modal');
-  if (Form.style.display = 'block') {
-    const crossElementForm = document.querySelector('.crossElement');
-
-    // Ajoutez un écouteur d'événements transitionend pour détecter la fin de l'animation
-    Form.addEventListener('transitionend', () => {
-      // Mettez le focus sur l'élément crossElementForm une fois l'animation terminée
-      crossElementForm.focus();
-    }, { once: true }); // L'option { once: true } assure que l'écouteur sera supprimé après sa première exécution
-  }
-};
-
-// Appelez focusForm après l'ouverture de la modale
-focusForm();*/
