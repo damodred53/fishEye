@@ -1,5 +1,4 @@
 const createModalGalerie = async (data) => {
-    console.log(data)
         /* Génération de la première page du carousel */
         const contactModal = document.querySelector('#contact_modal');
         const photos = await getPhotographers();
@@ -96,6 +95,25 @@ const createModalGalerie = async (data) => {
         // Initialiser currentIndex avec l'index de l'image cliquée
         let currentIndex = clickedImageIndex >= 0 ? clickedImageIndex : 0;
     
+        /* la vidéo devient cliquable et se lance en cliquant dessus */
+        video.addEventListener("click", () => {
+            if (video.paused || video.ended) {
+                video.play();
+            } else {
+                video.pause();
+            }
+        })
+        /* Gestion de la vidéo dans la gallerie via le clavier */
+        video.addEventListener('keydown', (e) => {
+            const keyCode = e.key               
+            if (keyCode == 'Enter') {
+                if (video.paused || video.ended) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+            }
+        })
     
     
     // Fonction pour modifier dynamiquement la galerie //
@@ -120,42 +138,18 @@ const createModalGalerie = async (data) => {
                 img.setAttribute('alt', currentSlide.image);
                 divGallerie.appendChild(img);
             } else if (currentSlide.video) {
-                console.log(currentSlide.video)
                 video.setAttribute('src', newVideoPath);
                 divGallerie.appendChild(video);
                 video.setAttribute('aria-label', currentSlide.video);
                 video.setAttribute('alt', currentSlide.video);
-                /* la vidéo devient cliquable et se lance en cliquant dessus */
-                video.addEventListener("click", () => {
-                    if (video.paused || video.ended) {
-                        video.play();
-                    } else {
-                        video.pause();
-                    }
-                })
-                /* Gestion de la vidéo dnas la gallerie via le clavier */
-                video.addEventListener('keydown', (e) => {
-                    const keyCode = e.key               
-                    if (keyCode == 'Enter') {
-                        if (video.paused || video.ended) {
-                            video.play();
-                        } else {
-                            video.pause();
-                        }
-                    }
-                })
-            }
-    
-            /*arrowPrevKeyboard.addEventListener('keydown', (e) => goingLeft(e));
-            arrowNextKeyboard.addEventListener('keydown', (e) => goingRight(e));*/
-    
+            } 
             title.innerText = currentSlide.title;
             divGallerie.appendChild(title); 
         };
     
         crossElement.addEventListener('click', () => {
        
-            /*renvoie vers le fonction de fermeture de la modale */
+            /*renvoie vers la fonction de fermeture de la modale */
             closeModal();
         });
     
@@ -181,7 +175,6 @@ const createModalGalerie = async (data) => {
         const goingLeft = (e) => {
             
             const keyCode = e.key;
-            console.log(keyCode)
             if (keyCode === 'ArrowLeft') {
                 prevSlide();  
                 updateCarousel();
@@ -191,15 +184,11 @@ const createModalGalerie = async (data) => {
         const goingRight = (e) => {
             
             const keyCode = e.key;
-            console.log(keyCode)
             if (keyCode === 'ArrowRight') {
                 nextSlide();  
                 updateCarousel();
             }         
         }   
-    
-       
-    
         updateCarousel();
     };
     

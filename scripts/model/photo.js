@@ -1,5 +1,5 @@
 class Photo {
-/* Génération d'un objet photo dnas lequel sont mappés les photographies */
+/* Génération d'un objet photo dans lequel sont mappés les photographies */
         constructor(id,photographerId,title,image,likes,date,price) {
             this.id = id;
             this.photographerId = photographerId;

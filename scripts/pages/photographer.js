@@ -6,7 +6,9 @@ const urlSearchParams = new URLSearchParams(window.location.search)
 const photographerId = urlSearchParams.get('id')
 const pricePhotographer = [];
 
-
+/**
+ * Création de la page avec la récupération des données et l'envoi des profils des photographes à la fonction de display
+ */
 const createPage = async () => {
     if (photographerId) {
 
@@ -14,7 +16,7 @@ const createPage = async () => {
         const selectedPhotographers = await selectPhotographerById(photographersProfil.photographers);
         displayPhotographer(selectedPhotographers);
      } else {
-        throw new Error('l\'url n\'a pas permis d\'identifier un photpographe');
+        throw new Error('l\'url n\'a pas permis d\'identifier un photographe');
      }
 }
 
@@ -26,7 +28,7 @@ const selectPhotographerById = async (data)  => {
     let photographerToDisplay = []
     /* récupération de l'id contenu dans l'url et mise dans le tableau photographerToDisplay*/
     const photographerSelected = window.location.href.split('=').reverse()[0]
-
+    /* Récupération du photographe dont l'id correspond à celui contenu dans l'adresse URL */
     for (let i = 0; i< data.length; i++) {
         if (data[i].id == photographerSelected) {
             photographerToDisplay.push(data[i])
@@ -39,7 +41,6 @@ const selectPhotographerById = async (data)  => {
         throw new Error('Aucun photographe ne correspond à votre recherche');
         
     } else {
-
         return photographerToDisplay
     }
 
@@ -70,9 +71,6 @@ const displayPhotographer = async (photographers) => {
     article.remove();
     linkToRemove.remove();
 
-
-
-
     /* Création d'une div pour mettre en colonne les éléments générés sur le DOM */
 
     const myDiv = document.createElement('div');
@@ -82,17 +80,12 @@ const displayPhotographer = async (photographers) => {
     myDiv.appendChild(cityandcountry);
     myDiv.appendChild(tag);
 
-
     photographerProfil.classList.add('flexbox_profil');
-
-
 
     /* Création de la barre aside */
     const searchlikePhotographers = await getPhotographers();
-
     const arrayNumberOfLikesByArtist = [];
     
-
 /* récupération des likes par photographies */
     for (let i = 0; i<searchlikePhotographers.media.length ; i++) {
         if (searchlikePhotographers.media[i].photographerId == photographerId) {
@@ -149,13 +142,13 @@ const createAsideBar = async (data, likes) => {
 }
 
 const displayPhotosAndVideo = (data) => {
-
+/* les informations passent par le media pattern pour être classées */
     const arrayElement = [];
     data.map((element) => {
         MediaPattern(element);
         arrayElement.push(element)
     });
-
+/* Selection des photos/vidéos concernant un photographe spécifique */
     const filteredMedia = arrayElement.filter((elem) => elem.photographerId == photographerId);
     MapData(filteredMedia);
     

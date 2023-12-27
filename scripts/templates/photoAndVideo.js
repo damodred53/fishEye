@@ -1,6 +1,5 @@
 const photoAndVideo = (data) => {
   /* template pour la création des images et vidéos pour chaque photograhe */
-console.log(data)
     let picture = "";
     let video = null; 
 
@@ -48,7 +47,7 @@ console.log(data)
     heart.setAttribute('alt', 'likes');
     heart.setAttribute('aria-label', 'icone où cliquer pour liker la photo')
 
-
+/* intégration de la fonctionnalité pour lancer la modale-gallerie au clic */
     mediaElement.addEventListener('click', () => {
 
         test2(data)
@@ -76,9 +75,6 @@ console.log(data)
             heart.classList.add('clicked');
         }
     });
-
-   
-    /*navigatePicturesVideoByKeyboard();*/
 
     /* Gestion de l'accessibilité */
 

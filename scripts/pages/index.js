@@ -14,16 +14,14 @@
             currentUrl.searchParams.set('id', photographers.id);
 
             const link = document.createElement('a');
-
-            link.setAttribute('href', currentUrl.href );
+            link.setAttribute('href', `photographer.html?id=${photographers.id}` );
             link.classList.add('link')
-
             photographersSection.appendChild(userCardDOM);
         }
     }
 
     async function init() {
-        // Récupère les datas des photographes
+        // Récupère les datas des photographes puis envoie les données concernant les photographes à la fonction displayData
         const photographers  = await getPhotographers();
         displayData(photographers.photographers);
         
